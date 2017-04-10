@@ -1,0 +1,22 @@
+﻿@model ConstantConnect.MVCClient.Models.DashboardTile<ConstantConnect.DTO.CRM.Dashboard_ServiceTickets_Result>
+
+<div class="col-lg-3 col-md-6">
+    <div class="info-box bg-@Model.Color">
+        <span class="info-box-icon"><i class="@Model.Icon"></i></span>
+        <div class="info-box-content">
+            <div class="info-box-tooltip-icon">
+                <button type="button" class="btn btn-outline" data-toggle="popover" data-trigger="focus" data-placement="left" title="@Model.Title" data-content="@Model.Description">
+                    <span class="fa fa-info-circle" aria-hidden="true"></span>
+                </button>
+            </div>
+            <span class="info-box-number">@Model.Data.Count(r => r.TicketState.Contains("Active")).ToString()</span>
+            <span class="info-box-text">@Model.Title</span>
+            <div class="info-box-footer">
+                <a href="@Model.LinkToTable" data-toggle="collapse" data-parent="#accordion">
+                    <span class="pull-left">View Details</span>
+                    <span class="pull-right"><i class="fa fa-arrow-circle-right"></i></span>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

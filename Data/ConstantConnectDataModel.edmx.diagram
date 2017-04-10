@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="c15eb3b31ab7432daed0989138f70c12" Name="Diagram1" >
+        <EntityTypeShape EntityType="ConstantConnectModel.Device" Width="1.5" PointX="5" PointY="1.5" />
+        <EntityTypeShape EntityType="ConstantConnectModel.EventGroup" Width="1.5" PointX="7.25" PointY="1.75" />
+        <EntityTypeShape EntityType="ConstantConnectModel.Event" Width="1.5" PointX="9.5" PointY="1.25" />
+        <EntityTypeShape EntityType="ConstantConnectModel.Organization" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="ConstantConnectModel.RoomDetail" Width="1.5" PointX="2.75" PointY="3.75" />
+        <EntityTypeShape EntityType="ConstantConnectModel.RoomSummary" Width="1.5" PointX="5" PointY="6.625" />
+        <AssociationConnector Association="ConstantConnectModel.FK_Devices_RoomDetails" />
+        <AssociationConnector Association="ConstantConnectModel.FK_EventGroup_Devices" />
+        <AssociationConnector Association="ConstantConnectModel.FK_Events_EventGroup" />
+        <AssociationConnector Association="ConstantConnectModel.FK_Organization_Organization" />
+        <AssociationConnector Association="ConstantConnectModel.FK_Organization_OrgPartner" />
+        <AssociationConnector Association="ConstantConnectModel.FK_RoomSummary_RoomDetails" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

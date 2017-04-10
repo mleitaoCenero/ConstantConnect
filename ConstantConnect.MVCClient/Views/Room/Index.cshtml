@@ -1,0 +1,65 @@
+﻿@model ConstantConnect.DTO.Shared.Room
+
+@{
+    Layout = null;
+}
+
+<div class="modal-body">
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="room-modalLabel">@Model.Name</h4>
+    </div>
+    <div class="modal-body" id="room-modal-content">
+        <ul class="nav nav-tabs">
+            <li class="active">
+                <a href="#details" data-toggle="tab">Details</a>
+            </li>
+            <li>
+                <a href="#performance" data-toggle="tab">Performance</a>
+            </li>
+            <li>
+                <a href="#servicetickets" data-toggle="tab">Service Tickets</a>
+            </li>
+            <li>
+                <a href="#documents" data-toggle="tab">Documents</a>
+            </li>
+            <li>
+                <a href="#inventory" data-toggle="tab">Inventory</a>
+            </li>
+            <li>
+                <a href="#devicesIPData" data-toggle="tab">Devices/IP Data</a>
+            </li>
+            <li>
+                <a href="#warranty-tab" data-toggle="tab">Warranty</a>
+            </li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            @*<div class="tab-pane fade in active" id="details">
+                @{Html.RenderPartial("Details", Model);}
+            </div>
+            <div class="tab-pane fade" id="performance">
+                @{Html.RenderPartial("Performance", Model); }
+            </div>
+            <div class="tab-pane fade" id="servicetickets">
+                @{Html.RenderAction("ServiceTickets", "Room"); }
+            </div>*@
+            @*<div class="tab-pane fade" id="documents">
+                    @{Html.RenderAction("Documents", "Room"); }
+                </div>
+                <div class="tab-pane fade" id="inventory">
+                    @{Html.RenderAction("Inventory", "Room"); }
+                </div>
+                <div class="tab-pane fade" id="devicesIPData">
+                    @{Html.RenderAction("DevicesIPData", "Room"); }
+                </div>
+                <div class="tab-pane fade" id="warranty-tab">
+                    @{Html.RenderAction("Warranty", "Room"); }
+                </div>*@
+        </div>
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    </div>
+</div>

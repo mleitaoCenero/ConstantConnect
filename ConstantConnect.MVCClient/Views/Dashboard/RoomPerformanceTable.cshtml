@@ -1,0 +1,159 @@
+﻿@model ConstantConnect.MVCClient.Models.DashboardViewModel
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<div class="col-lg-6 col-md-6 col-lg-offset-6">
+    <div id="roomperformance" class="collapse">
+        <div class="box box-warning box-table">
+            <div class="box-header with-border">
+                <h3 class="box-title">Room Performance</h3>
+                <div class="box-tools pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-wrench"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Modify View</a></li>
+                            <li><a href="#">Save View</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">My Views</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" class="export" data-content="table-roomperformance">Export data</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-box-tool" data-toggle="collapse" data-target="#roomperformance" @*data-widget="collapse"*@><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: block;">
+                <div class="row">
+                    <div class="input-group">
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input type="text" class="form-control" id="search-roomperformance" placeholder="Search for a room">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
+                        </span>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="table-container">
+                    <table class="table table-striped table-hover data-table" id="table-roomperformance">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th class="text-right">Uptime</th>
+                                <th class="text-right no-sort">Survey Scores</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.RoomPerformanceData)
+                            {
+                                <tr class="text-nowrap">
+                                    <td>
+                                        @{ var room = Model.ActiveRoomsData.FirstOrDefault(r => r.Id == item.RoomID);}
+                                        @Html.ActionLink(item.RoomName, "ModalAction", "Room", room, new
+                                        {
+                                            data_target = "#modal-container",
+                                            data_toggle = "modal"
+                                        })
+                                    </td>
+                                    <td>
+                                        <div class="progress">
+                                            <div class="progress-bar progress-bar-success" style="width: @item.UpTime%">
+                                                @item.UpTime %
+                                            </div>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">
+                                        @*<div class="rating-panel">
+                                                <div class="rating-header">
+                                                    <button type="button" class="btn btn-outline" data-toggle="popover" data-container="body" data-placement="left" data-popover-content="#rating-popover-content">
+                                                        <p><small>Average Rating: 9/10</small></p>
+                                                        <p><small>Reviews Counted: 76</small></p>
+                                                    </button>
+                                                </div>
+                                                <div class="hidden" id="rating-popover-content">
+                                                    <div class="popover-heading">
+                                                        Customer Reviews
+                                                    </div>
+                                                    <div class="popover-body">
+                                                        <ul class="list-group">
+                                                            <li class="list-group-item popover-item">
+                                                                <a href="#">
+                                                                    <div>
+                                                                        <strong>John Smith</strong>
+                                                                    </div>
+                                                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                                                    <div class="pull-right text-muted">
+                                                                        <em>January 12, 2017 | Rating: 3/5</em>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-group-item popover-item">
+                                                                <a href="#">
+                                                                    <div>
+                                                                        <strong>John Smith</strong>
+                                                                    </div>
+                                                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                                                    <div class="pull-right text-muted">
+                                                                        <em>January 1, 2017 | Rating: 4/5</em>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-group-item popover-item">
+                                                                <a href="#">
+                                                                    <div>
+                                                                        <strong>John Smith</strong>
+                                                                    </div>
+                                                                    <div>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque eleifend...</div>
+                                                                    <div class="pull-right text-muted">
+                                                                        <em>December 12, 2016 | Rating: 5/5</em>
+                                                                    </div>
+                                                                    <div class="clearfix"></div>
+                                                                </a>
+                                                            </li>
+                                                            <li class="list-group-item popover-item">
+                                                                <a class="text-center" href="#">
+                                                                    <strong>Read All Reviews</strong>
+                                                                    <i class="fa fa-angle-right"></i>
+                                                                </a>
+                                                            </li>
+                                                        </ul>
+                                                    </div>
+                                                </div>
+                                            </div>*@
+                                    </td>
+                                </tr>
+                                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- ./box-body -->
+            <div class="box-footer" style="display: block;">
+                <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+        </div>
+
+
+    </div>
+</div>
+<script>
+    $(document).ready(function () {
+        $('#search-roomperformance').keyup(function () {
+            var value = this.value.toLowerCase().trim();
+            $('#table-roomperformance').find("tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var notFound = (id.indexOf(value) == -1);
+                    $(this).closest('tr').toggle(!notFound);
+                    return notFound;
+                })
+            });
+        });
+    });
+</script>

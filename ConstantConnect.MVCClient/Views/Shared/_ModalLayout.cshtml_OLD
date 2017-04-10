@@ -1,0 +1,46 @@
+﻿@using System.Web.Optimization
+
+<section class="content">
+      
+</section>
+
+<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.13/datatables.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        $('.modal-data-table').DataTable();
+        //    responsive: true,
+        //    info: false,
+        //    scrollY: "310px",
+        //    scrollX: true,
+        //    scrollCollapse: true,
+        //    paging: false,
+        //    columnsDefs: [
+        //        { "width": "35%", "targets": 0 }
+        //    ],
+        //    fixedColumns: true
+        //});
+
+        $('#search-roomserviceticket').keyup(function () {
+            var value = this.value.toLowerCase().trim();
+            $('#table-roomserviceticket').find("tr").each(function (index) {
+                if (!index) return;
+                $(this).find("td").each(function () {
+                    var id = $(this).text().toLowerCase().trim();
+                    var notFound = (id.indexOf(value) == -1);
+                    $(this).closest('tr').toggle(!notFound);
+                    return notFound;
+                })
+            });
+        });
+
+
+        $('#roomserviceticketstab').on('click', function () {
+            console.log("here")
+            $('.modal-data-table').DataTable().draw();
+        })
+    });
+</script>

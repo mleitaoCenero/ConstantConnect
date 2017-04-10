@@ -1,0 +1,284 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{748DB434-50B6-4295-B580-0841F078D347}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Data</RootNamespace>
+    <AssemblyName>Data</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ConstantConnectDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstantConnectDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConstantConnectDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ConstantConnectDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>ConstantConnectDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="CRMDataModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRMDataModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRMDataModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="CRMDataModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CRMDataModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard_ActiveRooms_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard_GetProjectFiles_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Dashboard_ServiceTicketTrends_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Device.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Document_Write_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_ClientUpdate_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_GetFunctions_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_GetManufacturers_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_GetStatuses_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_GetTypes_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_Get_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Equipment_RestrictedUpdate_Result.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Event.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EventGroup.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Incident.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipmemtipdata.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipment.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipmentBase.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipmentdescription.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipmentExtensionBase.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipmentfunction.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientequipmentstatus.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_clientroom.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="new_clientrooms_warrantylines.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="new_clientroom_projectfile.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_documentation.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_documentfilename.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_manufacturer.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_projectfile.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_Warranty.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="New_WarrantyContract.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Organization.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RoomDetail.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="RoomSummary.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="StringMap.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SubjectBase.cs">
+      <DependentUpon>CRMDataModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="User_Validate_Result.cs">
+      <DependentUpon>ConstantConnectDataModel.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <EntityDeploy Include="CRMDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CRMDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config" />
+    <EntityDeploy Include="ConstantConnectDataModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>ConstantConnectDataModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="ConstantConnectDataModel.edmx.diagram">
+      <DependentUpon>ConstantConnectDataModel.edmx</DependentUpon>
+    </None>
+    <None Include="CRMDataModel.edmx.diagram">
+      <DependentUpon>CRMDataModel.edmx</DependentUpon>
+    </None>
+    <EntityDeploy Include="Model1.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1.edmx.diagram">
+      <DependentUpon>Model1.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="ConstantConnectDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ConstantConnectDataModel.edmx</DependentUpon>
+      <LastGenOutput>ConstantConnectDataModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="ConstantConnectDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>ConstantConnectDataModel.edmx</DependentUpon>
+      <LastGenOutput>ConstantConnectDataModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="CRMDataModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>CRMDataModel.Context.cs</LastGenOutput>
+      <DependentUpon>CRMDataModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="CRMDataModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CRMDataModel.edmx</DependentUpon>
+      <LastGenOutput>CRMDataModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1.edmx</DependentUpon>
+      <LastGenOutput>Model1.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

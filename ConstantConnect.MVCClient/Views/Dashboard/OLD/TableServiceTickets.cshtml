@@ -1,0 +1,158 @@
+﻿@model ConstantConnect.MVCClient.Models.DataTableTile<ConstantConnect.DTO.CRM.Dashboard_ServiceTickets_Result>
+<div class="col-lg-9 col-md-9 col-lg-offset-3">
+    <div id="servicetickets" class="collapse">
+        <div class="box box-danger box-table">
+            <div class="box-header with-border">
+                <h3 class="box-title">Service Tickets</h3>
+                <div class="box-tools pull-right">
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-box-tool dropdown-toggle" data-toggle="dropdown">
+                            <i class="fa fa-wrench"></i>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li><a href="#">Modify View</a></li>
+                            <li><a href="#">Save View</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">My Views</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#" class="export" data-content="table-ServiceTickets">Export data</a></li>
+                        </ul>
+                    </div>
+                    <button type="button" class="btn btn-box-tool" data-toggle="collapse" data-target="#servicetickets" @*data-widget="collapse"*@><i class="fa fa-times"></i></button>
+                </div>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body" style="display: block;">
+                <div class="row">
+                    <div class="input-group">
+                        <input type="hidden" name="search_param" value="all" id="search_param">
+                        <input type="text" class="form-control" id="servicetickets-search" placeholder="Search for a Service">
+                        <span class="input-group-btn">
+                            <button class="btn btn-default" type="button"><span class="fa fa-search"></span></button>
+                        </span>
+                    </div>
+                    <div class="checkbox-group">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" class="filter-column filter-column-6" id="serviceTicketFilter" value="Yes">Show Closed Tickets
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.row -->
+                <div class="table-container">
+                    <table class="table table-striped table-hover data-table" width="100%" id="table-servicetickets">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Ticket #</th>
+                                <th>Date Opened</th>
+                                <th>Subject</th>
+                                <th>Pre-Service</th>
+                                <th>Open/Closed</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Data)
+                            {
+                                <tr class="">
+                                    <td><a href="#" data-toggle="modal" data-target="#room-modal">@item.RoomName</a></td>
+                                    <td><a href="#" data-toggle="modal" data-target="#serviceTicket-modal">@item.TicketNumber</a></td>
+                                    <td>@item.TicketCreatedOn</td>
+                                    <td>@item.TicketSubject</td>
+                                    <td>@item.TicketStatus</td>
+                                    <td>@item.TicketState</td>
+                                    <td>@item.TicketStatusCode</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <!-- ./box-body -->
+            <div class="box-footer" style="display: block;">
+                @*<div class="row">
+                        <div class="col-sm-2 col-md-offset-1">
+                            <div class="description-block">
+                                <span class="description-text text-blue huge">
+                                    @Model.Count(i => i.RoomName != null)
+                                </span>
+                                <h5 class="description-header">Total</h5>
+                                <span class="description-text">Proactive Rooms</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2">
+                            <div class="description-block">
+                                <span class="description-text text-green huge">
+                                    @Model.Count(i => i.OnlineStatus == 1)
+                                </span>
+                                <h5 class="description-header">Online</h5>
+                                <span class="description-text">TOTAL ROOMS</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2">
+                            <div class="description-block">
+                                <span class="description-text text-yellow huge">
+                                    @Model.Count(i => i.VTCStatus == 1)
+                                </span>
+                                <h5 class="description-header">Video Conference</h5>
+                                <span class="description-text">TOTAL INUSE</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <!-- /.col -->
+                        <div class="col-sm-2">
+                            <div class="description-block">
+                                <span class="description-text text-red huge">
+                                    @Model.Count(i => i.ATCStatus == 1)
+                                </span>
+                                <h5 class="description-header">Audio Conference</h5>
+                                <span class="description-text">TOTAL INUSE</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                        <div class="col-sm-2">
+                            <div class="description-block">
+                                <span class="description-text text-light-blue small">
+                                    @Model.Max(i => i.TestDate)
+                                </span>
+                                <h5 class="description-header">Last Test</h5>
+                                <span class="description-text">DATE</span>
+                            </div>
+                            <!-- /.description-block -->
+                        </div>
+                    </div>*@
+                <!-- /.row -->
+            </div>
+            <!-- /.box-footer -->
+        </div>
+
+    </div>
+</div>
+
+@*<script src="https://code.jquery.com/jquery-2.2.4.min.js"
+        integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+        crossorigin="anonymous"></script>*@
+
+<script>
+
+    $('#search-servicetickets').keyup(function () {
+        var value = this.value.toLowerCase().trim();
+        $('#table-servicetickets').find("tr").each(function (index) {
+            if (!index) return;
+            $(this).find("td").each(function () {
+                var id = $(this).text().toLowerCase().trim();
+                var notFound = (id.indexOf(value) == -1);
+                $(this).closest('tr').toggle(!notFound);
+                return notFound;
+            })
+        });
+    });
+
+
+</script>

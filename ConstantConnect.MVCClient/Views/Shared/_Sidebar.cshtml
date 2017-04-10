@@ -1,0 +1,68 @@
+﻿@using ConstantConnect.MVCClient.Controllers
+<aside class="main-sidebar">
+    <section class="sidebar">
+        @* BEGIN Menu *@
+        <ul class="sidebar-menu">
+            <li class="header">Dashboard</li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.Index) ? "active" : "")">
+                <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-link"></i> <span>Tile</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(DashboardController.ListView) ? "active" : "")">
+                <a href="@Url.Action("ListView", "Dashboard")"><i class="fa fa-link"></i> <span>List</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ProjectFileController.ProjectFileDetails) ? "active" : "")">
+                <a href="@Url.Action("ProjectFileDetails", "ProjectFile")"><i class="fa fa-cubes"></i> <span>Projects</span></a>
+            </li>
+            <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(InventoryController.InventoryIndex) ? "active" : "")">
+                <a href="@Url.Action("InventoryIndex", "Inventory")"><i class="fa fa-list"></i> <span>Inventory</span></a>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-gears"></i> <span>Service</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.CreateNewTicket) ? "active" : "")">
+                        <a href="@Url.Action("CreateNewTicket", "Service")"><span>Create New Ticket</span></a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.OpenTickets) ? "active" : "")">
+                        <a href="@Url.Action("OpenTickets", "Service")"><span>Open Tickets</span></a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.ResolvedTickets) ? "active" : "")">
+                        <a href="@Url.Action("OpenTickets", "Service")"><span>Open Tickets</span></a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.WarrantyInformation) ? "active" : "")">
+                        <a href="@Url.Action("WarrantyInformation", "Service")"><span>Open Tickets</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-line-chart"></i> <span>Reports</span>
+                    <span class="pull-right-container">
+                        <i class="fa fa-angle-left pull-right"></i>
+                    </span>
+                </a>
+                <ul class="treeview-menu">
+                    @*<li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ReportsController.CreateNewTicket) ? "active" : "")">
+                        <a href="@Url.Action("CreateNewTicket", "Service")"><span>Create New Ticket</span></a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.OpenTickets) ? "active" : "")">
+                        <a href="@Url.Action("OpenTickets", "Service")"><span>Open Tickets</span></a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.ResolvedTickets) ? "active" : "")">
+                        <a href="@Url.Action("OpenTickets", "Service")"><span>Open Tickets</span></a>
+                    </li>
+                    <li class="@(ViewContext.RouteData.Values["Action"].ToString() == nameof(ServiceController.WarrantyInformation) ? "active" : "")">
+                        <a href="@Url.Action("WarrantyInformation", "Service")"><span>Open Tickets</span></a>
+                    </li>*@
+                </ul>
+            </li>
+            
+
+        </ul>
+        @* END Menu *@
+    </section>
+</aside>

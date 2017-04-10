@@ -1,0 +1,172 @@
+﻿@model ConstantConnect.MVCClient.Models.InventoryDetailsModel
+
+<div class="alert alert-success alert-dismissable" id="alertmessage" style="display:none">
+    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+    <div id="alertplaceholder"></div>
+</div>
+
+<div class="row">
+
+    @using (Html.BeginForm("edit", "Inventory", FormMethod.Post, new { id = "form-inventoryedit" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col-lg-6 b-r">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_ModelNumber, "Model", htmlAttributes: new { @class = "control-label col-md-3"})
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_ModelNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Model Number", @readonly="readonly"} })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_ModelNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_SerialNumber, "Serial", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_SerialNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Serial", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_SerialNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_AssetID, "Asset", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_AssetID, new { htmlAttributes = new { @class = "form-control", placeholder = "Asset ID" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_AssetID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_PartNumber, "Part No.", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_PartNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Part Number", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_PartNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_EquipmentStatusIdName, "Status", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_EquipmentStatusIdName, new { htmlAttributes = new { @class = "form-control", placeholder = "Equipment Status", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_EquipmentStatusIdName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_ClientRoomEquipmentIdName, "Location", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_ClientRoomEquipmentIdName, new { htmlAttributes = new { @class = "form-control", placeholder = "Location", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_ClientRoomEquipmentIdName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_ManufacturerIdName, "Manufacturer", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_ManufacturerIdName, new { htmlAttributes = new { @class = "form-control", placeholder = "Manufacturer", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_ManufacturerIdName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_EquipmentFunctionIdName, "Function Type", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_EquipmentFunctionIdName, new { htmlAttributes = new { @class = "form-control", placeholder = "Function Type", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_EquipmentFunctionIdName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_PartNumber, "Part No.", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_PartNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Part Number", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_PartNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-lg-6">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_Firmware, "Firmware", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_Firmware, new { htmlAttributes = new { @class = "form-control", placeholder = "Firmware", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_Firmware, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_RMANumber, "RMA No.", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_RMANumber, new { htmlAttributes = new { @class = "form-control", placeholder = "RMA Number", @readonly = "readonly" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_RMANumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_WCITTag, "WCIT Tag", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_WCITTag, new { htmlAttributes = new { @class = "form-control", placeholder = "WCIT Tag" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_WCITTag, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_EquipmentNotes, "Notes", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-lg-9">
+                        @*<div class="note-editable panel-body" contenteditable="true" spellcheck="true" data-gramm_editor="true" style="height: 200px;">*@
+                        @Html.TextAreaFor(model => model.Equipment.New_EquipmentNotes, new { @class = "form-control"})
+                        @*</div>*@
+                    </div>
+                </div>
+                <div class="form-group pull-right">
+                    <button type="reset" class="btn btn-default">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+
+            </div>
+        </div>
+        }
+</div>
+
+<script>
+    //$(document).ready(function () {
+    //    $('.selectpicker').selectpicker({})
+    //});
+    //$(document).on('submit', '#form-inventoryedit', function (e) {
+    //    e.preventDefault();
+
+    //    var form = $(this);
+    //    $.ajax({
+    //        url: form.attr("action"),
+    //        method: form.attr("method"),
+    //        data: form.serialize(),
+    //        success: function (result) {
+    //            $('#alertplaceholder').html('<span>' + result + '</span>')
+    //            $('#alertmessage').show();
+    //            setTimeout(function () {
+    //                $("#alertmessage").hide();
+    //            }, 5000);
+    //        }
+    //    })
+    //})
+
+    //function showalert(message, alerttype) {
+    //    $('#alertplaceholder').append('<div id="alertdiv" class="alert ' + alerttype + '"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + message + '</span></div>')
+    //    setTimeout(function () {
+    //        $("#alertdiv").remove();
+    //    }, 5000);
+    //}
+
+    $(document).off('submit');
+    $(document).on('submit', '#form-inventoryedit', function (e) {
+        e.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: form.serialize(),
+            success: function (result) {
+                showalert(result.Message, result.Strong, result.AlertType);
+            }
+        })
+    })
+
+    function showalert(message, strong, alerttype) {
+        $('#alertplaceholder').append('<div id="alertdiv" class="alert alert-' + alerttype + ' alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + message + " " + '<strong>' + strong + '</strong></span></div>')
+        setTimeout(function () {
+            $("#alertdiv").remove();
+        }, 3000);
+    }
+
+</script>

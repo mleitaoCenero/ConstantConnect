@@ -1,0 +1,144 @@
+﻿@model ConstantConnect.MVCClient.Models.InventoryDetailsModel
+
+
+
+<div class="row">
+
+    @using (Html.BeginForm("edit", "Inventory", FormMethod.Post, new { id = "form-inventoryedit" }))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="col-lg-6 b-r">
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_ModelNumber, "Model", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_ModelNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Model Number" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_ModelNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_SerialNumber, "Serial", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_SerialNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Serial" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_SerialNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_AssetID, "Asset", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_AssetID, new { htmlAttributes = new { @class = "form-control", placeholder = "Asset ID" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_AssetID, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_PartNumber, "Part No.", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-md-9">
+                        @Html.EditorFor(model => model.Equipment.New_PartNumber, new { htmlAttributes = new { @class = "form-control", placeholder = "Part Number" } })
+                        @Html.ValidationMessageFor(model => model.Equipment.New_PartNumber, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Location</label>
+                    <div class="col-lg-9">
+                        @{var locationList = Model.ClientRooms.Select(x => new SelectListItem
+                            {
+                                Value = x.Id.ToString(),
+                                Text = x.Name,
+                                Selected = x.Id == Model.Equipment.New_ClientRoomEquipmentId
+                            }); }
+                        @Html.DropDownListFor(model => model.Equipment.New_ClientRoomEquipmentId, locationList, new
+                   {
+                       id = "inventoryLoacation",
+                       @class = "selectpicker form-control",
+                       data_live_search = "true"
+                   })
+                        <span class="help-block m-b-none">Select where the equipment is actually located.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Manufacturer</label>
+                    <div class="col-lg-9">
+                        @{ var manufacturers = Model.Manufacturers.Select(x => new SelectListItem
+                            {
+                                Value = x.New_manufacturerId.ToString(),
+                                Text = x.New_name,
+                                Selected = x.New_manufacturerId == Model.Equipment.New_ManufacturerId
+                            });
+                        }
+                        @Html.DropDownListFor(model => model.Equipment.New_ManufacturerId, manufacturers, new
+                       {
+                           id = "manufacturerLoacation",
+                           @class = "selectpicker form-control",
+                           data_live_search = "true"
+                       })
+                        <span class="help-block m-b-none">Select the equipment manufacturer.</span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-lg-3 control-label">Type</label>
+                    <div class="col-lg-9">
+                        @{ var functions = Model.FunctionTypes.Select(x => new SelectListItem
+                            {
+                                Value = x.New_clientequipmentfunctionId.ToString(),
+                                Text = x.New_name,
+                                Selected = x.New_clientequipmentfunctionId == Model.Equipment.New_EquipmentFunctionId
+                            });
+                        }
+                        @Html.DropDownListFor(model => model.Equipment.New_EquipmentFunctionId, functions, new
+                       {
+                           id = "function",
+                           @class = "selectpicker form-control",
+                           data_live_search = "true"
+                       })
+                        <span class="help-block m-b-none">Select the function that best represents the equipment.</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Equipment.New_EquipmentNotes, "Notes", htmlAttributes: new { @class = "control-label col-md-3" })
+                    <div class="col-lg-9">
+                        @*<div class="note-editable panel-body" contenteditable="true" spellcheck="true" data-gramm_editor="true" style="height: 200px;">*@
+                        @Html.TextAreaFor(model => model.Equipment.New_EquipmentNotes, new { @class = "form-control" })
+                        @*</div>*@
+                    </div>
+                </div>
+                @*</form>*@
+
+                            <div class="form-group pull-right">
+                                <button type="reset" class="btn btn-default">Cancel</button>
+                                <button type="submit" class="btn btn-primary">Save</button>
+                            </div>
+
+                        </div>
+        </div>
+                            }
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('.selectpicker').selectpicker({})
+    });
+    $(document).off('submit');
+    $(document).on('submit', '#form-inventoryedit', function (e) {
+        e.preventDefault();
+        var form = $(this);
+        $.ajax({
+            url: form.attr("action"),
+            method: form.attr("method"),
+            data: form.serialize(),
+            success: function (result) {
+                showalert(result.Message, result.Strong, result.AlertType);
+            }
+        })
+    })
+
+    function showalert(message, strong, alerttype) {
+        $('#alertplaceholder').append('<div id="alertdiv" class="alert alert-' + alerttype + ' alert-dismissable"><a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>' + message + " " + '<strong>' + strong + '</strong></span></div>')
+        setTimeout(function () {
+            $("#alertdiv").remove();
+        }, 3000);
+    }
+
+</script>

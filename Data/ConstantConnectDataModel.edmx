@@ -1,0 +1,730 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ConstantConnectModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Devices">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomID" Type="uniqueidentifier" />
+          <Property Name="EquipmentID" Type="uniqueidentifier" />
+          <Property Name="DeviceName" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="DeviceDescription" Type="varchar(max)" />
+          <Property Name="Model" Type="varchar" MaxLength="100" />
+          <Property Name="SerialNumber" Type="varchar" MaxLength="50" />
+          <Property Name="SubSystemID" Type="bigint" />
+          <Property Name="Software" Type="varchar" MaxLength="50" />
+          <Property Name="Lamp1" Type="int" />
+          <Property Name="Lamp2" Type="int" />
+          <Property Name="HoldMail" Type="datetime" />
+          <Property Name="Status" Type="bigint" />
+        </EntityType>
+        <EntityType Name="EventGroup">
+          <Key>
+            <PropertyRef Name="EventGroupID" />
+          </Key>
+          <Property Name="EventGroupID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartCode" Type="datetime" Nullable="false" />
+          <Property Name="StartID" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="EndID" Type="varchar" MaxLength="50" />
+          <Property Name="DeviceID" Type="bigint" Nullable="false" />
+          <Property Name="EventStart" Type="datetime" />
+          <Property Name="EventEnd" Type="datetime" />
+          <Property Name="MinutesOn" Type="bigint" />
+          <Property Name="CallNumber" Type="varchar" MaxLength="250" />
+          <Property Name="CallDisconnectReason" Type="varchar" MaxLength="250" />
+        </EntityType>
+        <EntityType Name="Events">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomID" Type="uniqueidentifier" />
+          <Property Name="DeviceID" Type="bigint" />
+          <Property Name="EventName" Type="varchar" MaxLength="50" />
+          <Property Name="EventType" Type="varchar" MaxLength="50" />
+          <Property Name="EventTime" Type="datetime" />
+          <Property Name="StartID" Type="varchar" MaxLength="50" />
+          <Property Name="EndID" Type="varchar" MaxLength="50" />
+          <Property Name="minuteson" Type="smallint" />
+          <Property Name="SourceID" Type="bigint" />
+          <Property Name="CallID" Type="varchar" MaxLength="50" />
+          <Property Name="SourceOn" Type="smallint" />
+          <Property Name="CallNumber" Type="varchar" MaxLength="250" />
+          <Property Name="CallDisconnectReason" Type="varchar" MaxLength="250" />
+          <Property Name="CallDisconnectID" Type="varchar" MaxLength="50" />
+          <Property Name="EventGroupID" Type="bigint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="OrganizationID" />
+          </Key>
+          <Property Name="OrganizationID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ParentID" Type="uniqueidentifier" />
+          <Property Name="Name" Type="nvarchar" MaxLength="255" Nullable="false" />
+          <Property Name="AddressLine1" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddressLine2" Type="nvarchar" MaxLength="100" />
+          <Property Name="AddressLine3" Type="nvarchar" MaxLength="100" />
+          <Property Name="City" Type="nvarchar" MaxLength="100" />
+          <Property Name="State" Type="nvarchar" MaxLength="2" />
+          <Property Name="Zip" Type="nvarchar" MaxLength="12" />
+          <Property Name="Country" Type="nvarchar" MaxLength="100" />
+          <Property Name="TimeZone" Type="nvarchar" MaxLength="100" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="CreatedOn" Type="datetime" Nullable="false" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="CreatedBy" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ModifiedBy" Type="uniqueidentifier" />
+          <Property Name="PartnerID" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="RoomDetails">
+          <Key>
+            <PropertyRef Name="CRMRoomID" />
+          </Key>
+          <Property Name="CRMRoomID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoomName" Type="varchar" MaxLength="150" />
+          <Property Name="RoomDescription" Type="varchar" MaxLength="250" />
+          <Property Name="CRMOwnerID" Type="uniqueidentifier" />
+          <Property Name="RoomCheckReady" Type="bit" />
+          <Property Name="Dashboard_2" Type="bit" />
+          <Property Name="Dashboard_3" Type="bit" />
+          <Property Name="LocationID" Type="bigint" />
+          <Property Name="UTCOffset" Type="smallint" />
+          <Property Name="TestOffset" Type="smallint" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="ServicePlan" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="RoomSummary">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="LineID" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="RoomID" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoomName" Type="varchar" MaxLength="75" />
+          <Property Name="VTCStatus" Type="smallint" />
+          <Property Name="ATCStatus" Type="smallint" />
+          <Property Name="ControlStatus" Type="smallint" />
+          <Property Name="PresentationStatus" Type="smallint" />
+          <Property Name="OnlineStatus" Type="smallint" />
+          <Property Name="TestDate" Type="datetime" />
+          <Property Name="CRM_ProjectRoomID" Type="uniqueidentifier" />
+          <Property Name="RoomView_RoomID" Type="uniqueidentifier" />
+        </EntityType>
+        <Association Name="FK_Devices_RoomDetails">
+          <End Role="RoomDetails" Type="Self.RoomDetails" Multiplicity="0..1" />
+          <End Role="Devices" Type="Self.Devices" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomDetails">
+              <PropertyRef Name="CRMRoomID" />
+            </Principal>
+            <Dependent Role="Devices">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventGroup_Devices">
+          <End Role="Devices" Type="Self.Devices" Multiplicity="1" />
+          <End Role="EventGroup" Type="Self.EventGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Devices">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="EventGroup">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_EventGroup">
+          <End Role="EventGroup" Type="Self.EventGroup" Multiplicity="1" />
+          <End Role="Events" Type="Self.Events" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventGroup">
+              <PropertyRef Name="EventGroupID" />
+            </Principal>
+            <Dependent Role="Events">
+              <PropertyRef Name="EventGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_Organization">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="Organization1" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationID" />
+            </Principal>
+            <Dependent Role="Organization1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_OrgPartner">
+          <End Role="Organization" Type="Self.Organization" Multiplicity="0..1" />
+          <End Role="Organization1" Type="Self.Organization" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationID" />
+            </Principal>
+            <Dependent Role="Organization1">
+              <PropertyRef Name="PartnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomSummary_RoomDetails">
+          <End Role="RoomDetails" Type="Self.RoomDetails" Multiplicity="1" />
+          <End Role="RoomSummary" Type="Self.RoomSummary" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RoomDetails">
+              <PropertyRef Name="CRMRoomID" />
+            </Principal>
+            <Dependent Role="RoomSummary">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="Dashboard_ActiveRooms" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserID" Type="uniqueidentifier" Mode="In" />
+        </Function>
+        <Function Name="User_Validate" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+          <Parameter Name="Password" Type="nvarchar" Mode="In" />
+        </Function>
+        <EntityContainer Name="ConstantConnectModelStoreContainer">
+          <EntitySet Name="Devices" EntityType="Self.Devices" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="EventGroup" EntityType="Self.EventGroup" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Events" EntityType="Self.Events" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Organization" EntityType="Self.Organization" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomDetails" EntityType="Self.RoomDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="RoomSummary" EntityType="Self.RoomSummary" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_Devices_RoomDetails" Association="Self.FK_Devices_RoomDetails">
+            <End Role="RoomDetails" EntitySet="RoomDetails" />
+            <End Role="Devices" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventGroup_Devices" Association="Self.FK_EventGroup_Devices">
+            <End Role="Devices" EntitySet="Devices" />
+            <End Role="EventGroup" EntitySet="EventGroup" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_EventGroup" Association="Self.FK_Events_EventGroup">
+            <End Role="EventGroup" EntitySet="EventGroup" />
+            <End Role="Events" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_Organization" Association="Self.FK_Organization_Organization">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Organization1" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_OrgPartner" Association="Self.FK_Organization_OrgPartner">
+            <End Role="Organization" EntitySet="Organization" />
+            <End Role="Organization1" EntitySet="Organization" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomSummary_RoomDetails" Association="Self.FK_RoomSummary_RoomDetails">
+            <End Role="RoomDetails" EntitySet="RoomDetails" />
+            <End Role="RoomSummary" EntitySet="RoomSummary" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ConstantConnectModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="ConstantConnectEntities" annotation:LazyLoadingEnabled="true" >
+          <FunctionImport Name="Dashboard_ActiveRooms" ReturnType="Collection(ConstantConnectModel.Dashboard_ActiveRooms_Result)">
+          <Parameter Name="UserID" Mode="In" Type="Guid" />
+          </FunctionImport>
+          <EntitySet Name="Devices" EntityType="ConstantConnectModel.Device" />
+          <EntitySet Name="EventGroups" EntityType="ConstantConnectModel.EventGroup" />
+          <EntitySet Name="Events" EntityType="ConstantConnectModel.Event" />
+          <EntitySet Name="Organizations" EntityType="ConstantConnectModel.Organization" />
+          <EntitySet Name="RoomDetails" EntityType="ConstantConnectModel.RoomDetail" />
+          <EntitySet Name="RoomSummaries" EntityType="ConstantConnectModel.RoomSummary" />
+          <AssociationSet Name="FK_Devices_RoomDetails" Association="ConstantConnectModel.FK_Devices_RoomDetails">
+            <End Role="RoomDetail" EntitySet="RoomDetails" />
+            <End Role="Device" EntitySet="Devices" />
+          </AssociationSet>
+          <AssociationSet Name="FK_EventGroup_Devices" Association="ConstantConnectModel.FK_EventGroup_Devices">
+            <End Role="Device" EntitySet="Devices" />
+            <End Role="EventGroup" EntitySet="EventGroups" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Events_EventGroup" Association="ConstantConnectModel.FK_Events_EventGroup">
+            <End Role="EventGroup" EntitySet="EventGroups" />
+            <End Role="Event" EntitySet="Events" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_Organization" Association="ConstantConnectModel.FK_Organization_Organization">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Organization1" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Organization_OrgPartner" Association="ConstantConnectModel.FK_Organization_OrgPartner">
+            <End Role="Organization" EntitySet="Organizations" />
+            <End Role="Organization1" EntitySet="Organizations" />
+          </AssociationSet>
+          <AssociationSet Name="FK_RoomSummary_RoomDetails" Association="ConstantConnectModel.FK_RoomSummary_RoomDetails">
+            <End Role="RoomDetail" EntitySet="RoomDetails" />
+            <End Role="RoomSummary" EntitySet="RoomSummaries" />
+          </AssociationSet>
+          <FunctionImport Name="User_Validate" ReturnType="Collection(ConstantConnectModel.User_Validate_Result)">
+            <Parameter Name="UserName" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
+        </EntityContainer>
+        <ComplexType Name="Dashboard_ActiveRooms_Result">
+          <Property Type="Guid" Name="OrganizationID" Nullable="true" />
+          <Property Type="String" Name="OrganizationName" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="AddressLine1" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AddressLine2" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="AddressLine3" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="City" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="State" Nullable="true" MaxLength="2" />
+          <Property Type="String" Name="Zip" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Country" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TimeZone" Nullable="true" MaxLength="100" />
+          <Property Type="Guid" Name="RoomID" Nullable="true" />
+          <Property Type="String" Name="RoomName" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="RoomDescription" Nullable="true" MaxLength="250" />
+          <Property Type="Int32" Name="ServicePlan" Nullable="true" />
+          <Property Type="Int32" Name="Status" Nullable="true" />
+          <Property Type="Boolean" Name="RoomInUse" Nullable="true" />
+          <Property Type="Int32" Name="VideoInUse" Nullable="true" />
+          <Property Type="Int32" Name="AudioInUse" Nullable="true" />
+          <Property Type="Int32" Name="ProjectorInUse" Nullable="true" />
+          <Property Type="Int32" Name="MonitorInUse" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="Device">
+          <Key>
+            <PropertyRef Name="DeviceID" />
+          </Key>
+          <Property Name="DeviceID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomID" Type="Guid" />
+          <Property Name="EquipmentID" Type="Guid" />
+          <Property Name="DeviceName" Type="String" Nullable="false" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+          <Property Name="Model" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="SerialNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SubSystemID" Type="Int64" />
+          <Property Name="Software" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Lamp1" Type="Int32" />
+          <Property Name="Lamp2" Type="Int32" />
+          <Property Name="HoldMail" Type="DateTime" Precision="3" />
+          <Property Name="Status" Type="Int64" />
+          <NavigationProperty Name="RoomDetail" Relationship="ConstantConnectModel.FK_Devices_RoomDetails" FromRole="Device" ToRole="RoomDetail" />
+          <NavigationProperty Name="EventGroups" Relationship="ConstantConnectModel.FK_EventGroup_Devices" FromRole="Device" ToRole="EventGroup" />
+        </EntityType>
+        <EntityType Name="EventGroup">
+          <Key>
+            <PropertyRef Name="EventGroupID" />
+          </Key>
+          <Property Name="EventGroupID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartCode" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="StartID" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="DeviceID" Type="Int64" Nullable="false" />
+          <Property Name="EventStart" Type="DateTime" Precision="3" />
+          <Property Name="EventEnd" Type="DateTime" Precision="3" />
+          <Property Name="MinutesOn" Type="Int64" />
+          <Property Name="CallNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CallDisconnectReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Device" Relationship="ConstantConnectModel.FK_EventGroup_Devices" FromRole="EventGroup" ToRole="Device" />
+          <NavigationProperty Name="Events" Relationship="ConstantConnectModel.FK_Events_EventGroup" FromRole="EventGroup" ToRole="Event" />
+        </EntityType>
+        <EntityType Name="Event">
+          <Key>
+            <PropertyRef Name="EventID" />
+          </Key>
+          <Property Name="EventID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomID" Type="Guid" />
+          <Property Name="DeviceID" Type="Int64" />
+          <Property Name="EventName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventType" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventTime" Type="DateTime" Precision="3" />
+          <Property Name="StartID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EndID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="minuteson" Type="Int16" />
+          <Property Name="SourceID" Type="Int64" />
+          <Property Name="CallID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="SourceOn" Type="Int16" />
+          <Property Name="CallNumber" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CallDisconnectReason" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CallDisconnectID" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EventGroupID" Type="Int64" Nullable="false" />
+          <NavigationProperty Name="EventGroup" Relationship="ConstantConnectModel.FK_Events_EventGroup" FromRole="Event" ToRole="EventGroup" />
+        </EntityType>
+        <EntityType Name="Organization">
+          <Key>
+            <PropertyRef Name="OrganizationID" />
+          </Key>
+          <Property Name="OrganizationID" Type="Guid" Nullable="false" />
+          <Property Name="ParentID" Type="Guid" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine1" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine2" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="AddressLine3" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="State" Type="String" MaxLength="2" FixedLength="false" Unicode="true" />
+          <Property Name="Zip" Type="String" MaxLength="12" FixedLength="false" Unicode="true" />
+          <Property Name="Country" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="TimeZone" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="CreatedOn" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="ModifiedOn" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="Guid" Nullable="false" />
+          <Property Name="ModifiedBy" Type="Guid" />
+          <Property Name="PartnerID" Type="Guid" />
+          <NavigationProperty Name="Organization1" Relationship="ConstantConnectModel.FK_Organization_Organization" FromRole="Organization" ToRole="Organization1" />
+          <NavigationProperty Name="Organization2" Relationship="ConstantConnectModel.FK_Organization_Organization" FromRole="Organization1" ToRole="Organization" />
+          <NavigationProperty Name="Organization11" Relationship="ConstantConnectModel.FK_Organization_OrgPartner" FromRole="Organization" ToRole="Organization1" />
+          <NavigationProperty Name="Organization3" Relationship="ConstantConnectModel.FK_Organization_OrgPartner" FromRole="Organization1" ToRole="Organization" />
+        </EntityType>
+        <EntityType Name="RoomDetail">
+          <Key>
+            <PropertyRef Name="CRMRoomID" />
+          </Key>
+          <Property Name="CRMRoomID" Type="Guid" Nullable="false" />
+          <Property Name="RoomName" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <Property Name="RoomDescription" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+          <Property Name="CRMOwnerID" Type="Guid" />
+          <Property Name="RoomCheckReady" Type="Boolean" />
+          <Property Name="Dashboard_2" Type="Boolean" />
+          <Property Name="Dashboard_3" Type="Boolean" />
+          <Property Name="LocationID" Type="Int64" />
+          <Property Name="UTCOffset" Type="Int16" />
+          <Property Name="TestOffset" Type="Int16" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="ServicePlan" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Devices" Relationship="ConstantConnectModel.FK_Devices_RoomDetails" FromRole="RoomDetail" ToRole="Device" />
+          <NavigationProperty Name="RoomSummary" Relationship="ConstantConnectModel.FK_RoomSummary_RoomDetails" FromRole="RoomDetail" ToRole="RoomSummary" />
+        </EntityType>
+        <EntityType Name="RoomSummary">
+          <Key>
+            <PropertyRef Name="RoomID" />
+          </Key>
+          <Property Name="LineID" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="RoomID" Type="Guid" Nullable="false" />
+          <Property Name="RoomName" Type="String" MaxLength="75" FixedLength="false" Unicode="false" />
+          <Property Name="VTCStatus" Type="Int16" />
+          <Property Name="ATCStatus" Type="Int16" />
+          <Property Name="ControlStatus" Type="Int16" />
+          <Property Name="PresentationStatus" Type="Int16" />
+          <Property Name="OnlineStatus" Type="Int16" />
+          <Property Name="TestDate" Type="DateTime" Precision="3" />
+          <Property Name="CRM_ProjectRoomID" Type="Guid" />
+          <Property Name="RoomView_RoomID" Type="Guid" />
+          <NavigationProperty Name="RoomDetail" Relationship="ConstantConnectModel.FK_RoomSummary_RoomDetails" FromRole="RoomSummary" ToRole="RoomDetail" />
+        </EntityType>
+        <Association Name="FK_Devices_RoomDetails">
+          <End Type="ConstantConnectModel.RoomDetail" Role="RoomDetail" Multiplicity="0..1" />
+          <End Type="ConstantConnectModel.Device" Role="Device" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="RoomDetail">
+              <PropertyRef Name="CRMRoomID" />
+            </Principal>
+            <Dependent Role="Device">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_EventGroup_Devices">
+          <End Type="ConstantConnectModel.Device" Role="Device" Multiplicity="1" />
+          <End Type="ConstantConnectModel.EventGroup" Role="EventGroup" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Device">
+              <PropertyRef Name="DeviceID" />
+            </Principal>
+            <Dependent Role="EventGroup">
+              <PropertyRef Name="DeviceID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Events_EventGroup">
+          <End Type="ConstantConnectModel.EventGroup" Role="EventGroup" Multiplicity="1" />
+          <End Type="ConstantConnectModel.Event" Role="Event" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="EventGroup">
+              <PropertyRef Name="EventGroupID" />
+            </Principal>
+            <Dependent Role="Event">
+              <PropertyRef Name="EventGroupID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_Organization">
+          <End Type="ConstantConnectModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="ConstantConnectModel.Organization" Role="Organization1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationID" />
+            </Principal>
+            <Dependent Role="Organization1">
+              <PropertyRef Name="ParentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Organization_OrgPartner">
+          <End Type="ConstantConnectModel.Organization" Role="Organization" Multiplicity="0..1" />
+          <End Type="ConstantConnectModel.Organization" Role="Organization1" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Organization">
+              <PropertyRef Name="OrganizationID" />
+            </Principal>
+            <Dependent Role="Organization1">
+              <PropertyRef Name="PartnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_RoomSummary_RoomDetails">
+          <End Type="ConstantConnectModel.RoomDetail" Role="RoomDetail" Multiplicity="1" />
+          <End Type="ConstantConnectModel.RoomSummary" Role="RoomSummary" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="RoomDetail">
+              <PropertyRef Name="CRMRoomID" />
+            </Principal>
+            <Dependent Role="RoomSummary">
+              <PropertyRef Name="RoomID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <ComplexType Name="User_Validate_Result">
+          <Property Type="Guid" Name="UserID" Nullable="false" />
+          <Property Type="String" Name="UserName" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="88" />
+          <Property Type="String" Name="Salt" Nullable="false" MaxLength="88" />
+          <Property Type="Boolean" Name="PasswordMustChange" Nullable="false" />
+          <Property Type="Boolean" Name="FirstLogIn" Nullable="false" />
+          <Property Type="Int32" Name="AuralinkAccess" Nullable="false" />
+          <Property Type="Boolean" Name="DashboardAccess" Nullable="false" />
+          <Property Type="Boolean" Name="Dashboard_Admin" Nullable="false" />
+          <Property Type="Boolean" Name="Dashboard_Financial" Nullable="false" />
+          <Property Type="Boolean" Name="Dashboard_Super" Nullable="false" />
+          <Property Type="Boolean" Name="RoomCheckAccess" Nullable="false" />
+          <Property Type="Boolean" Name="RoomCheck_Technician" Nullable="false" />
+          <Property Type="Boolean" Name="RoomCheck_Manager" Nullable="false" />
+          <Property Type="Boolean" Name="RoomCheck_Admin" Nullable="false" />
+          <Property Type="Boolean" Name="RoomCheck_Commissioning" Nullable="false" />
+          <Property Type="Int32" Name="EventSchedulerAccess" Nullable="false" />
+          <Property Type="Int32" Name="Status" Nullable="false" />
+          <Property Type="DateTime" Name="CreatedOn" Nullable="false" Precision="23" />
+          <Property Type="DateTime" Name="ModifiedOn" Nullable="true" Precision="23" />
+          <Property Type="Guid" Name="CreatedBy" Nullable="false" />
+          <Property Type="Guid" Name="ModifiedBy" Nullable="true" />
+          <Property Type="Guid" Name="OrganizationID" Nullable="false" />
+          <Property Type="Guid" Name="TenantID" Nullable="true" />
+          <Property Type="String" Name="Tenant" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="TenantPrefix" Nullable="true" MaxLength="16" />
+          <Property Type="String" Name="FirstName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="MiddleName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="LastName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="DisplayName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Salutation" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Email2" Nullable="true" MaxLength="100" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ConstantConnectModelStoreContainer" CdmEntityContainer="ConstantConnectEntities" >
+          <FunctionImportMapping FunctionImportName="Dashboard_ActiveRooms" FunctionName="ConstantConnectModel.Store.Dashboard_ActiveRooms">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConstantConnectModel.Dashboard_ActiveRooms_Result">
+                <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="RoomDescription" ColumnName="RoomDescription" />
+                <ScalarProperty Name="ServicePlan" ColumnName="ServicePlan" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="RoomInUse" ColumnName="RoomInUse" />
+                <ScalarProperty Name="VideoInUse" ColumnName="VideoInUse" />
+                <ScalarProperty Name="AudioInUse" ColumnName="AudioInUse" />
+                <ScalarProperty Name="ProjectorInUse" ColumnName="ProjectorInUse" />
+                <ScalarProperty Name="MonitorInUse" ColumnName="MonitorInUse" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="Devices">
+            <EntityTypeMapping TypeName="ConstantConnectModel.Device">
+              <MappingFragment StoreEntitySet="Devices">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="HoldMail" ColumnName="HoldMail" />
+                <ScalarProperty Name="Lamp2" ColumnName="Lamp2" />
+                <ScalarProperty Name="Lamp1" ColumnName="Lamp1" />
+                <ScalarProperty Name="Software" ColumnName="Software" />
+                <ScalarProperty Name="SubSystemID" ColumnName="SubSystemID" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="Model" ColumnName="Model" />
+                <ScalarProperty Name="DeviceDescription" ColumnName="DeviceDescription" />
+                <ScalarProperty Name="DeviceName" ColumnName="DeviceName" />
+                <ScalarProperty Name="EquipmentID" ColumnName="EquipmentID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="EventGroups">
+            <EntityTypeMapping TypeName="ConstantConnectModel.EventGroup">
+              <MappingFragment StoreEntitySet="EventGroup">
+                <ScalarProperty Name="CallDisconnectReason" ColumnName="CallDisconnectReason" />
+                <ScalarProperty Name="CallNumber" ColumnName="CallNumber" />
+                <ScalarProperty Name="MinutesOn" ColumnName="MinutesOn" />
+                <ScalarProperty Name="EventEnd" ColumnName="EventEnd" />
+                <ScalarProperty Name="EventStart" ColumnName="EventStart" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="EndID" ColumnName="EndID" />
+                <ScalarProperty Name="StartID" ColumnName="StartID" />
+                <ScalarProperty Name="StartCode" ColumnName="StartCode" />
+                <ScalarProperty Name="EventGroupID" ColumnName="EventGroupID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Events">
+            <EntityTypeMapping TypeName="ConstantConnectModel.Event">
+              <MappingFragment StoreEntitySet="Events">
+                <ScalarProperty Name="EventGroupID" ColumnName="EventGroupID" />
+                <ScalarProperty Name="CallDisconnectID" ColumnName="CallDisconnectID" />
+                <ScalarProperty Name="CallDisconnectReason" ColumnName="CallDisconnectReason" />
+                <ScalarProperty Name="CallNumber" ColumnName="CallNumber" />
+                <ScalarProperty Name="SourceOn" ColumnName="SourceOn" />
+                <ScalarProperty Name="CallID" ColumnName="CallID" />
+                <ScalarProperty Name="SourceID" ColumnName="SourceID" />
+                <ScalarProperty Name="minuteson" ColumnName="minuteson" />
+                <ScalarProperty Name="EndID" ColumnName="EndID" />
+                <ScalarProperty Name="StartID" ColumnName="StartID" />
+                <ScalarProperty Name="EventTime" ColumnName="EventTime" />
+                <ScalarProperty Name="EventType" ColumnName="EventType" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="DeviceID" ColumnName="DeviceID" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Organizations">
+            <EntityTypeMapping TypeName="ConstantConnectModel.Organization">
+              <MappingFragment StoreEntitySet="Organization">
+                <ScalarProperty Name="PartnerID" ColumnName="PartnerID" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TimeZone" ColumnName="TimeZone" />
+                <ScalarProperty Name="Country" ColumnName="Country" />
+                <ScalarProperty Name="Zip" ColumnName="Zip" />
+                <ScalarProperty Name="State" ColumnName="State" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="AddressLine3" ColumnName="AddressLine3" />
+                <ScalarProperty Name="AddressLine2" ColumnName="AddressLine2" />
+                <ScalarProperty Name="AddressLine1" ColumnName="AddressLine1" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+                <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomDetails">
+            <EntityTypeMapping TypeName="ConstantConnectModel.RoomDetail">
+              <MappingFragment StoreEntitySet="RoomDetails">
+                <ScalarProperty Name="ServicePlan" ColumnName="ServicePlan" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="TestOffset" ColumnName="TestOffset" />
+                <ScalarProperty Name="UTCOffset" ColumnName="UTCOffset" />
+                <ScalarProperty Name="LocationID" ColumnName="LocationID" />
+                <ScalarProperty Name="Dashboard_3" ColumnName="Dashboard_3" />
+                <ScalarProperty Name="Dashboard_2" ColumnName="Dashboard_2" />
+                <ScalarProperty Name="RoomCheckReady" ColumnName="RoomCheckReady" />
+                <ScalarProperty Name="CRMOwnerID" ColumnName="CRMOwnerID" />
+                <ScalarProperty Name="RoomDescription" ColumnName="RoomDescription" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="CRMRoomID" ColumnName="CRMRoomID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="RoomSummaries">
+            <EntityTypeMapping TypeName="ConstantConnectModel.RoomSummary">
+              <MappingFragment StoreEntitySet="RoomSummary">
+                <ScalarProperty Name="RoomView_RoomID" ColumnName="RoomView_RoomID" />
+                <ScalarProperty Name="CRM_ProjectRoomID" ColumnName="CRM_ProjectRoomID" />
+                <ScalarProperty Name="TestDate" ColumnName="TestDate" />
+                <ScalarProperty Name="OnlineStatus" ColumnName="OnlineStatus" />
+                <ScalarProperty Name="PresentationStatus" ColumnName="PresentationStatus" />
+                <ScalarProperty Name="ControlStatus" ColumnName="ControlStatus" />
+                <ScalarProperty Name="ATCStatus" ColumnName="ATCStatus" />
+                <ScalarProperty Name="VTCStatus" ColumnName="VTCStatus" />
+                <ScalarProperty Name="RoomName" ColumnName="RoomName" />
+                <ScalarProperty Name="RoomID" ColumnName="RoomID" />
+                <ScalarProperty Name="LineID" ColumnName="LineID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="User_Validate" FunctionName="ConstantConnectModel.Store.User_Validate">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="ConstantConnectModel.User_Validate_Result">
+                <ScalarProperty Name="UserID" ColumnName="UserID" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Salt" ColumnName="Salt" />
+                <ScalarProperty Name="PasswordMustChange" ColumnName="PasswordMustChange" />
+                <ScalarProperty Name="FirstLogIn" ColumnName="FirstLogIn" />
+                <ScalarProperty Name="AuralinkAccess" ColumnName="AuralinkAccess" />
+                <ScalarProperty Name="DashboardAccess" ColumnName="DashboardAccess" />
+                <ScalarProperty Name="Dashboard_Admin" ColumnName="Dashboard_Admin" />
+                <ScalarProperty Name="Dashboard_Financial" ColumnName="Dashboard_Financial" />
+                <ScalarProperty Name="Dashboard_Super" ColumnName="Dashboard_Super" />
+                <ScalarProperty Name="RoomCheckAccess" ColumnName="RoomCheckAccess" />
+                <ScalarProperty Name="RoomCheck_Technician" ColumnName="RoomCheck_Technician" />
+                <ScalarProperty Name="RoomCheck_Manager" ColumnName="RoomCheck_Manager" />
+                <ScalarProperty Name="RoomCheck_Admin" ColumnName="RoomCheck_Admin" />
+                <ScalarProperty Name="RoomCheck_Commissioning" ColumnName="RoomCheck_Commissioning" />
+                <ScalarProperty Name="EventSchedulerAccess" ColumnName="EventSchedulerAccess" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="OrganizationID" ColumnName="OrganizationID" />
+                <ScalarProperty Name="TenantID" ColumnName="TenantID" />
+                <ScalarProperty Name="Tenant" ColumnName="Tenant" />
+                <ScalarProperty Name="TenantPrefix" ColumnName="TenantPrefix" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
+                <ScalarProperty Name="Salutation" ColumnName="Salutation" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Email2" ColumnName="Email2" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

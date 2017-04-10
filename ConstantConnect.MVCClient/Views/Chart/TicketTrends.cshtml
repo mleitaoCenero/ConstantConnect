@@ -1,0 +1,481 @@
+﻿@model ConstantConnect.MVCClient.Models.DashboardViewModel
+@{
+    Layout = "";
+}
+<script type="text/javascript" src="//cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.js"></script>
+@*<link rel="stylesheet" type="text/css" href="//cdn.jsdelivr.net/bootstrap.daterangepicker/2/daterangepicker.css" />*@
+<link rel="stylesheet" type="text/css" href="~/Content/css/plugins/daterangepicker/daterangepicker-bs3.css" />
+
+
+@*<div class="col-lg-8">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div>
+                <h3 class="font-bold no-margins">
+                    Service ticket trends over date range
+                </h3>
+            </div>
+
+            <div class="m-t-sm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="tickettrendchart" style="padding: 0px; position: relative;">
+                            </div>
+                        </div>
+
+                        <div class="m-t-md">
+                            <div class="col-md-4">
+                                <small><strong>Specify a date range:</strong></small>
+                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                    <span></span> <b class="caret"></b>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <small><strong>Filter by Subject:</strong></small>
+                                <select id="subjectFilter" onchange="setSubject(event)" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <option value="">All</option>
+                                    @foreach (var item in Model.SubjectBaseData)
+                                    {
+                                        <option value="@item.Title">@item.Title</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <small><strong>Filter by Room:</strong></small>
+                                <select id="subjectFilter" onchange="setRoom(event)" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <option value="">All</option>
+                                    @foreach (var item in Model.ActiveRoomsData)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+
+                        </div>
+
+
+
+
+
+                        <div class="m-t-md">
+                            <div class="pull-right">
+                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                    <span></span> <b class="caret"></b>
+                                </div>
+
+                            </div>
+
+                            <small>
+                                <strong>Specify a date range:</strong>
+                            </small>
+                        </div>
+
+                    </div>
+                    <div class="col-md-4">
+                        <div class="stat-list-heading">
+                            <h2>Service ticket subjects</h2>
+                        </div>
+                        <ul class="stat-list m-t-sm">
+                            @foreach (var item in Model.ServiceTicketsData.Select(i => i.TicketSubject).Distinct())
+                            {
+                                if (item != null)
+                                {
+                                    <li>
+                                        <h4 class="no-margins">@item</h4>
+                                        <small>Total service tickets: @Model.ServiceTicketsData.Where(i => i.TicketSubject == item).Count()</small>
+                                    </li>
+                                }
+                            }
+                        </ul>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-md-8 m-t-md">
+
+            </div>
+
+        </div>
+    </div>
+</div>*@
+
+
+<div class="col-lg-8">
+    <div class="ibox">
+        <div class="ibox-content">
+            <div>
+                <h3 class="font-bold no-margins">
+                    Service ticket trends over date range
+                </h3>
+            </div>
+
+            <div class="m-t-sm">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="flot-chart">
+                            <div class="flot-chart-content" id="TicketTrendsChartBox" style="padding: 0px; position: relative;"></div>
+                        </div>
+
+                        <div class="m-t-md">
+                            <div class="col-md-4">
+                                <small><strong>Filter by Subject:</strong></small>
+                                <select id="subjectFilter" onchange="setSubject(event)" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <option value="">All</option>
+                                    @foreach (var item in Model.SubjectBaseData)
+                                    {
+                                        <option value="@item.Title">@item.Title</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <small><strong>Filter by Room:</strong></small>
+                                <select id="subjectFilter" onchange="setRoom(event)" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <option value="">All</option>
+                                    @foreach (var item in Model.ActiveRoomsData)
+                                    {
+                                        <option value="@item.Id">@item.Name</option>
+                                    }
+                                </select>
+                            </div>
+                            <div class="col-md-4">
+                                <small><strong>Specify a date range:</strong></small>
+                                <div id="reportrange" class="pull-right" style="background: #fff; cursor: pointer; padding: 5px 10px; border: 1px solid #ccc; width: 100%">
+                                    <i class="glyphicon glyphicon-calendar fa fa-calendar"></i>&nbsp;
+                                    <span></span> <b class="caret"></b>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-8 m-t-md">
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<script>
+    var previousPoint = null;
+    var dataurl = '/Chart/TicketTrends';
+    var start = moment().subtract(89, 'days');
+    var end = moment();
+
+    var groupBy = "month";
+    var roomId = null;
+    var subject = null;
+    var utcOffset = new Date().getTimezoneOffset() * -1;
+
+    function setGroupBy(e) {
+        var callingObj = e.target || e.srcElement;
+        if (callingObj != null) {
+            groupBy = callingObj.value;
+            renderChart(start, end);
+        }
+    }
+
+    function setSubject(e) {
+        var callingObj = e.target || e.srcElement;
+        if (callingObj != null) {
+            if (callingObj.value.length == 0) {
+                subject = null;
+            } else {
+                subject = callingObj.value;
+            }
+            renderChart(start, end);
+        }
+    }
+
+    function setRoom(e) {
+        var callingObj = e.target || e.srcElement;
+        if (callingObj != null) {
+            if (callingObj.value.length == 0) {
+                roomId = null;
+            } else {
+                roomId = callingObj.value;
+            }
+            renderChart(start, end);
+        }
+    }
+
+    function renderChart(startDate, endDate) {
+        $('#reportrange span').html(startDate.format('MMMM D, YYYY') + ' - ' + endDate.format('MMMM D, YYYY'));
+        start = startDate;
+        end = endDate;
+        var chartBox = document.getElementById("TicketTrendsChartBox");
+        var results, error;
+        if (chartBox != null) {
+            chartBox.innerHTML = "";
+            var params = "startDate=" + encodeURIComponent(startDate.format()) + "&endDate=" + encodeURIComponent(endDate.format());
+            if ((groupBy != null) && (groupBy.length > 0)) {
+                params += "&groupBy=" + encodeURIComponent(groupBy);
+            }
+            if ((roomId != null) && (roomId.length > 0)) {
+                params += "&roomId=" + encodeURIComponent(roomId);
+            }
+            if ((subject != null) && (subject.length > 0)) {
+                params += "&subject=" + encodeURIComponent(subject);
+            }
+            params += "&utcOffset=" + encodeURIComponent(utcOffset);
+            //alert(params);
+
+            var req = new XMLHttpRequest();
+            req.open("get", "/Chart/TicketTrends?" + params, true);
+            req.onreadystatechange = function () {
+                if (req.readyState == 4) {
+                    if (req.status == "200") {
+                        try {
+                            results = JSON.parse(req.responseText);
+                            if (results.length > 0) {
+                                var data = new Array(), xTicks = new Array(), startBoundary = moment(startDate), endBoundary = moment(endDate);
+                                if (groupBy == "day") {
+                                    startBoundary.hour(0).minute(0).second(0).millisecond(0);
+                                    endBoundary.hour(0).minute(0).second(0).millisecond(0);
+                                    for (var i = moment(startBoundary) ; i.isSameOrBefore(endBoundary) ; i.add("day", 1)) {
+                                        xTicks.push([Number(i.format("x")), i.format("MMM Do YYYY")]);
+                                    }
+                                    for (var i = 0; i < results.length; i++) {
+                                        data.push([Number(moment(results[i].entryDate).format("x")), results[i].ticketCount]);
+                                    }
+                                } else if (groupBy == "month") {
+                                    startBoundary.date(1).hour(0).minute(0).second(0).millisecond(0);
+                                    endBoundary.date(1).hour(0).minute(0).second(0).millisecond(0);
+                                    for (var i = moment(startBoundary) ; i.isSameOrBefore(endBoundary) ; i.add("month", 1)) {
+                                        xTicks.push([Number(i.format("x")), i.format("MMM YYYY")]);
+                                    }
+                                    for (var i = 0; i < results.length; i++) {
+                                        data.push([Number(moment(results[i].entryDate).format("x")), results[i].ticketCount]);
+                                    }
+                                } else if (groupBy == "year") {
+                                    startBoundary.month(1).date(1).hour(0).minute(0).second(0).millisecond(0);
+                                    endBoundary.month(1).date(1).hour(0).minute(0).second(0).millisecond(0);
+                                    for (var i = moment(startDate) ; i.isSameOrBefore(endDate) ; i.add("year", 1)) {
+                                        xTicks.push([Number(i.format("x")), i.format("YYYY")]);
+                                    }
+                                    for (var i = 0; i < results.length; i++) {
+                                        data.push([Number(moment(results[i].entryDate).format("x")), results[i].ticketCount]);
+                                    }
+                                } else if (groupBy == "room") {
+                                    for (var i = 0; i < results.length; i++) {
+                                        xTicks.push([i, results[i].roomName]);
+                                        data.push([i, Number(results[i].ticketCount)]);
+                                    }
+                                } else if (groupBy == "subject") {
+                                    for (var i = 0; i < results.length; i++) {
+                                        xTicks.push([i, results[i].subjectName]);
+                                        data.push([i, Number(results[i].ticketCount)]);
+                                    }
+                                }
+
+                                var trendPlot = $.plot(chartBox, [{ label: "Tickets", data: data }], {
+                                    series: {
+                                        lines: {
+                                            show: true,
+                                            lineWidth: 2,
+                                            fill: true,
+                                            fillColor: { colors: [{ opacity: 0.0 }, { opacity: 0.0 }] }
+                                        },
+                                        points: {
+                                            show:true
+                                        }
+                                    },
+                                    yaxis: { min: 0, tickFormatter: formatter },
+                                    xaxis: { ticks: xTicks },
+                                    colors: ["#0073B7"],
+                                    grid: {
+                                        color: "#999999",
+                                        hoverable: true,
+                                        clickable: true,
+                                        tickColor: "#D4D4D4",
+                                        borderWidth: 0
+                                    },
+                                    legend: { show: false }
+                                });
+
+                                $("#TicketTrendsChartBox").bind("plothover", function (event, pos, item) {
+                                    if (item) {
+                                        if (previousPoint != item.dataIndex) {
+                                            previousPoint = item.dataIndex;
+
+                                            $("#tooltip").remove();
+                                            var x = item.datapoint[0], y = item.datapoint[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+                                            showTooltip(item.pageX, item.pageY, item.series.label + ": " + y);
+                                        }
+                                    } else {
+                                        $("#tooltip").remove();
+                                        previousPoint = null;
+                                    }
+                                });
+                            } else {
+                                chartBox.innerHTML = "No results to display.";
+                            }
+                        } catch (e) {
+                            error = "Error: Invalid query results. Specific error was: " + e.message;
+                            console.log(error);
+                            chartBox.innerHTML = error;
+                        }
+                    } else {
+                        error = "Error: Query failed to run. Response code was " + req.status + ". Response was: " + req.responseText;
+                        console.log(error);
+                        chartBox.innerHTML = error;
+                    }
+                }
+            };
+            req.send();
+        }
+    }
+
+    function formatter(val, axis) {
+        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    };
+
+    function showTooltip(x, y, contents) {
+        $('<div id="tooltip">' + contents + '</div>').css({
+            position: 'absolute',
+            display: 'none',
+            top: y + 5,
+            left: x + 5,
+            border: '1px solid #fdd',
+            padding: '2px',
+            'background-color': '#fee',
+            opacity: 0.80
+        }).appendTo("body").fadeIn(200);
+    }
+
+    $(function () {
+        $('#reportrange').daterangepicker({
+            showDropdowns: true,
+            showWeekNumbers: true,
+            showISOWeekNumbers: true,
+            startDate: start,
+            endDate: end,
+            ranges: {
+                'This Month': [moment().startOf('month'), moment().endOf('month')],
+                'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                'Last 90 Days': [moment().subtract(89, 'days'), moment()],
+                'One Year': [moment().subtract(1, 'years'), moment()]
+            },
+            alwaysShowCalendars: true,
+            minDate: moment().subtract(1, 'years'),
+            maxDate: moment(),
+            opens: "left"
+        }, renderChart);
+
+        renderChart(start, end);
+    });
+
+
+    //$(function () {
+    //    var barOptions = {
+    //        series: {
+    //            lines: {
+    //                show: true,
+    //                lineWidth: 2,
+    //                fill: true,
+    //                fillColor: {
+    //                    colors: [{
+    //                        opacity: 0.0
+    //                    }, {
+    //                        opacity: 0.0
+    //                    }]
+    //                }
+    //            }
+    //        },
+    //        yaxis: { min: 0, tickFormatter: formatter },
+    //        xaxis:{
+    //            ticks: [[1, "Jan"], [2, "Feb"], [3, "Mar"], [4, "Apr"], [5, "May"], [6, "Jun"], [7, "Jul"], [8, "Aug"], [9, "Sep"], [10, "Oct"], [11, "Nov"], [12, "Dec"]]
+    //        },
+    //        colors: ["#0073B7"],
+    //        grid: {
+    //            color: "#999999",
+    //            hoverable: true,
+    //            clickable: true,
+    //            tickColor: "#D4D4D4",
+    //            borderWidth: 0
+    //        },
+    //        legend: {
+    //            show: false
+    //        },
+    //    };
+    //    function formatter(val, axis) {
+    //        return val.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //    };
+    //    $("#tickettrendchart").bind("plothover", function (event, pos, item) {
+    //        if (item) {
+    //            if (previousPoint != item.dataIndex) {
+    //                previousPoint = item.dataIndex;
+    //                $("#tooltip").remove();
+    //                var x = item.datapoint[0],
+    //                    y = item.datapoint[1].toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    //                showTooltip(item.pageX, item.pageY, item.series.label + ": " + y);
+    //            }
+    //        }
+    //        else {
+    //            $("#tooltip").remove();
+    //            previousPoint = null;
+    //        }
+    //    });
+    //    function showTooltip(x, y, contents) {
+    //        $('<div id="tooltip">' + contents + '</div>').css({
+    //            position: 'absolute',
+    //            display: 'none',
+    //            top: y + 5,
+    //            left: x + 5,
+    //            border: '1px solid #fdd',
+    //            padding: '2px',
+    //            'background-color': '#fee',
+    //            opacity: 0.80
+    //        }).appendTo("body").fadeIn(200);
+    //    }
+    //    $('#reportrange').daterangepicker({
+    //        showDropdowns: true,
+    //        showWeekNumbers: true,
+    //        showISOWeekNumbers: true,
+    //        startDate: start,
+    //        endDate: end,
+    //        ranges: {
+    //            'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+    //            'This Month': [moment().startOf('month'), moment().endOf('month')],
+    //            'Last 90 Days': [moment().subtract(89, 'days'), moment()],
+    //            'One Year': [moment().subtract(1,'years'), moment()]
+    //        },
+    //        alwaysShowCalendars: true,
+    //        minDate: moment().subtract(1, 'years'),
+    //        maxDate: moment(),
+    //        opens: "left"
+    //    }, cb);
+    //    cb(start, end);
+    //    function cb(start, end) {
+    //        $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'));
+    //        console.log(start + " " + end);
+    //        $.ajax({
+    //            url: dataurl,
+    //            method: 'GET',
+    //            data: { 'start': start.format('MMMM D, YYYY'), 'end': end.format('MMMM D, YYYY')},
+    //            success: function (data) {
+    //                console.log(JSON.stringify(data));
+    //                $.plot($("#tickettrendchart"), data, barOptions);
+    //            },
+    //            error: function (req, err) {
+    //                console.log(err);
+    //            }
+    //        });
+    //    }
+    //});
+</script>
+
+
